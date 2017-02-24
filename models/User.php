@@ -2,7 +2,8 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
-
+use yii\web\IdentityInterface;
+use Yii;
 class User extends ActiveRecord
 {
     
@@ -26,7 +27,7 @@ class User extends ActiveRecord
 	}
 	public  function Attr($array){
 		$this->name = !empty($array['name']) ? ($array['name']) : '';
-		$this->password = !empty($array['password']) ? ($array['password']) : '';
+		$this->password = !empty($array['password']) ? Yii::$app->getSecurity()->generatePasswordHash($array['password']) : '';
 		$this->email = !empty($array['email']) ? ($array['email']) : '';
 		$this->gender = !empty($array['gender']) ? ($array['gender']) : '';
 		$this->hoppies = !empty($array['hoppies']) ? ($array['hoppies']) : '';

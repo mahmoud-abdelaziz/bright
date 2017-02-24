@@ -49,5 +49,23 @@ class UsersController extends Controller
     		$user->save();
     	}
     	return $this->redirect(Url::base(true));
+    }
+
+    public function actionLogin()
+    {
+    	$inputs = \Yii::$app->request->post();
+    	if(!empty($inputs['email']) && !empty($inputs['password'])){
+    		$user = User::find()->where(['email'=>$inputs['email']])->one();
+    		if(!empty($user)){
+    			if (Yii::$app->getSecurity()->validatePassword($inputs['password'], $user->password)) {
+				    $response['status'] = "success";
+		    		$response['message'] = $user->token;
+		    		return json_encode($response);
+				}
+    		}
+    	}
+		    $response['status'] = "falied";
+		    $response['message'] = "invalid email or password";
+		    return json_encode($response);    	
     }    
 }

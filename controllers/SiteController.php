@@ -78,11 +78,24 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-        return $this->render('login', [
+        return $this->render('index', [
             'model' => $model,
         ]);
     }
+    public function actionRegister()
+    {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
 
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        return $this->render('register', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Logout action.
      *

@@ -19,7 +19,7 @@ class User extends ActiveRecord
 	{
 	    return [
 	        ['name', 'required'],
-	        ['password', 'required'],
+	        ['password', 'required'],       
 	        ['email', 'required'],
 	        ['email', 'email'],
 	        ['email', 'unique', 'targetAttribute' => ['email'], 'message' => 'Email already registered .'],

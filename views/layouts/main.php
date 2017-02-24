@@ -1,3 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Test</title>
+
+    <!-- LOAD BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+
+    <!-- LOAD JQUERY -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- LOAD ANGULAR -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+
+
+</head>
+<!-- apply the module and controller to our body so angular is applied to that -->
+<body ng-app="formApp" ng-controller="formController">
+
+
+
 <?php
 
 /* @var $this \yii\web\View */
@@ -8,7 +28,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -54,7 +73,6 @@ AppAsset::register($this);
     <div class="container">
         <?= $content ?>
     </div>
-</div>
 
 <?php $this->endBody() ?>
 </body>

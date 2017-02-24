@@ -25,17 +25,17 @@ class UsersController extends Controller
 		    $model->save();
 			Yii::$app->mailer->compose()
 			    ->setFrom("global.web.sender@gmail.com")
-			    ->setTo('mahmoudabdelaziz.4com@gmail.com')
+			    ->setTo($model->email)
 			    ->setSubject('Activate your account')
 			    ->setTextBody('Plain text content')
 			    ->setHtmlBody('<a href="'.Url::base(true)."/users/activate?code=".$model->activation_code."&id=".$model->id.'" target="_blank" > Click here to activate your account </a>')
 			    ->send();		    
-		    $response['status'] = "success";
+		    $response['success'] = true;
 		    $response['message'] = "successfully registered please check your mail";
 		    return json_encode($response);
 		} else {
 		    $errors = $model->errors;
-		    $response['status'] = "falied";
+		    $response['success'] = false;
 		    $response['message'] = $errors;
 		    return json_encode($response);
 		}
@@ -58,14 +58,15 @@ class UsersController extends Controller
     		$user = User::find()->where(['email'=>$inputs['email']])->one();
     		if(!empty($user)){
     			if (Yii::$app->getSecurity()->validatePassword($inputs['password'], $user->password)) {
-				    $response['status'] = "success";
-		    		$response['message'] = $user->token;
+				    $response['success'] = true;
+				    $response['message'] = "logged in successfully";
+		    		$response['token'] = $user->token;
 		    		return json_encode($response);
 				}
     		}
     	}
-		    $response['status'] = "falied";
-		    $response['message'] = "invalid email or password";
+		    $response['success'] = false;
+		    $response['email'] = "invalid email or password";
 		    return json_encode($response);    	
     }    
 }
